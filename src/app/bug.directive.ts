@@ -1,7 +1,7 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: 'bug',
+  selector: '[bug]',
   exportAs: 'bug',
 })
 export class BugDirective {}
