@@ -1,16 +1,26 @@
 import { Component } from '@angular/core';
-import { BugDirective } from './bug.directive';
-
+import { NgForm } from '@angular/forms';
 
 
 @Component({
   selector: 'app-root',
   template: `
-    <h1 bug #ref="bug">Bug Bug Bug</h1>
-    <button (click)="test(ref)">:(</button>
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+      <input name="first" ngModel required #first="ngModel">
+      <input name="last" ngModel>
+      <button>Submit</button>
+    </form>
+    
+    <p>First name value: {{ first.value }}</p>
+    <p>First name valid: {{ first.valid }}</p>
+    <p>Form value: {{ f.value | json }}</p>
+    <p>Form valid: {{ f.valid }}</p>
   `,
   styles: []
 })
 export class AppComponent {
-  test(bug: BugDirective) {}
+  onSubmit(f: NgForm) {
+    console.log(f.value);  // { first: '', last: '' }
+    console.log(f.valid);  // false
+  }
 }
